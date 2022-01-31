@@ -1,10 +1,59 @@
-import React from 'react';
+//import Area
+import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom'
+import swal from 'sweetalert';
 
+const config = require('../config')
+//RFC
 export default function Login() {
     //1.state/hook variable
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     //2.functions
+    let myFunc=()=>{
+      //console.log('ojojojok');
+      console.log(username);
+      console.log(password);
+
+      var data = {
+        "data":{
+          'username':username,
+        password:password
+        }
+      }
+      //API calling
+      fetch("https://safe-wildwood-83604.herokuapp.com/api/berkserk-logins",
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json',
+                    'accept':'application/json'
+                  },
+        body: JSON.stringify(data)
+      })
+      //.then(response => response.json())
+      .then((response)=>{
+        if(!response.ok) throw new Error(response.status);
+        return response.json()
+      })
+      .then((response)=>{
+        console.log(response.status);
+        /* if(response.status === 200){
+          swal("Good job!", "Login Successfully!", "success");
+        } */ 
+        //swal("Good job!", "Login Successfully!", "success");
+      })
+    
+      .catch((e)=>{
+        //console.log(e)
+        if(e.status === 403){
+          swal("Bad job!", "Unauthorized!", "error");
+        }
+      })
+      .finally((all)=>{
+        console.log(all)
+      })
+    }
 
     //3.return statement
   return (
@@ -33,19 +82,19 @@ export default function Login() {
                       <div className="col-12 col-lg-10">
                         <h1 className="font__family-montserrat font__weight-bold font__size-42 line__height-42 mt-0 mb-45 text-center text-lg-left">LOGIN</h1>
                         <form action="#" className="brk-form brk-form-strict maxw-570 mx-auto mx-lg-0" data-brk-library="component__form">
-                          <input type="text" placeholder="Username or Email Address" />
-                          <input type="password" placeholder="Password" />
+                          <input type="text" placeholder="Username or Email Address" name="username" value={ username } onChange={(e)=>{setUsername(e.target.value)}} />
+                          <input type="password" placeholder="Password" name="password" value={ password } onChange={(e)=>{setPassword(e.target.value)}} />
                           <div className="no-margin pl-10 pr-10 mb-30 mt-40 d-flex flex-wrap justify-content-between align-items-center">
                             <div>
                               <input id="checkbox-strict-1" name="checkbox" type="checkbox" defaultValue={1} defaultChecked="checked" />
-                              <label className="brk-form-checkbox-label" htmlFor="checkbox-strict-1">Remember Me</label>
+                              <label className="brk-form-checkbox-label" for="checkbox" htmlFor="checkbox-strict-1">Remember Me</label>
                             </div>
                             <div>
                               <a className="font__size-14 line__height-24 brk-base-font-color text-decoration_underline" href="#">Forgot password?</a>
                             </div>
                           </div>
                           <div className="d-flex flex-wrap justify-content-between align-items-center flex-column flex-lg-row">
-                            <button className="btn-backgrounds btn-backgrounds btn-backgrounds_280 btn-backgrounds_white btn-backgrounds_left-icon font__family-montserrat font__weight-bold text-uppercase font__size-13 z-index-2 text-center letter-spacing-20 mt-10" data-brk-library="component__button">
+                            <button type="button" className="btn-backgrounds btn-backgrounds btn-backgrounds_280 btn-backgrounds_white btn-backgrounds_left-icon font__family-montserrat font__weight-bold text-uppercase font__size-13 z-index-2 text-center letter-spacing-20 mt-10" name="btn" data-brk-library="component__button" onClick={ myFunc } value="Login">
                               <span className="text">Login Now</span>
                               <span className="before"><i className="far fa-hand-point-right" /></span>
                             </button>
