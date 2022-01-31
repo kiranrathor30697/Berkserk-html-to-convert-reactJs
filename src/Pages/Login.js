@@ -19,11 +19,11 @@ export default function Login() {
       var data = {
         "data":{
           'username':username,
-        password:password
+          password:password
         }
       }
       //API calling
-      fetch("https://safe-wildwood-83604.herokuapp.com/api/berkserk-logins",
+      fetch(`${ config.prod_url}/api/berkserk-logins`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json',
@@ -33,22 +33,17 @@ export default function Login() {
       })
       //.then(response => response.json())
       .then((response)=>{
-        if(!response.ok) throw new Error(response.status);
         return response.json()
       })
       .then((response)=>{
-        //console.log(response);
-        /* if(response.status === 200){
-          swal("Good job!", "Login Successfully!", "success");
-        } */ 
+        console.log(response);
+         
         swal("Good job!", "Login Successfully!", "success");
       })
     
       .catch((e)=>{
         //console.log(e)
-        if(e.status === 403){
           swal("Bad job!", "Unauthorized!", "error");
-        }
       })
       .finally((all)=>{
         console.log(all)
@@ -82,8 +77,8 @@ export default function Login() {
                       <div className="col-12 col-lg-10">
                         <h1 className="font__family-montserrat font__weight-bold font__size-42 line__height-42 mt-0 mb-45 text-center text-lg-left">LOGIN</h1>
                         <form action="#" className="brk-form brk-form-strict maxw-570 mx-auto mx-lg-0" data-brk-library="component__form">
-                          <input type="text" placeholder="Username or Email Address" name="username" value={ username } onChange={(e)=>{setUsername(e.target.value)}} />
-                          <input type="password" placeholder="Password" name="password" value={ password } onChange={(e)=>{setPassword(e.target.value)}} />
+                          <input type="text" placeholder="Username or Email Address" name="username" value={ username } onChange={(e)=>{setUsername(e.target.value)}} required />
+                          <input type="password" placeholder="Password" name="password" value={ password } onChange={(e)=>{setPassword(e.target.value)}} required />
                           <div className="no-margin pl-10 pr-10 mb-30 mt-40 d-flex flex-wrap justify-content-between align-items-center">
                             <div>
                               <input id="checkbox-strict-1" name="checkbox" type="checkbox" defaultValue={1} defaultChecked="checked" />

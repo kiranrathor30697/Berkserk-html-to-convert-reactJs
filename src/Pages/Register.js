@@ -1,9 +1,55 @@
-import React from 'react';
+//Import area
+import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom'
+import swal from 'sweetalert';
+
+const config = require('../config')
+
+//RFC
 export default function Register() {
     //1.state/hook variable
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     //2.functions
+    let myFunc=()=>{
+      //console.log('ojojojok');
+      console.log(email);
+      console.log(password);
+
+      var data = {
+        "data":{
+          'email':email,
+        password:password
+        }
+      }
+      //API calling
+      fetch(`${ config.prod_url}/api/berkserk-registers`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json',
+                    'accept':'application/json'
+                  },
+        body: JSON.stringify(data)
+      })
+      //.then(response => response.json())
+      .then((response)=>{
+        return response.json()
+      })
+      .then((response)=>{
+        console.log(response);
+         
+        swal("Good job!", "Register Successfully!", "success");
+      })
+    
+      .catch((e)=>{
+        //console.log(e)
+          swal("Bad job!", "Unauthorized!", "error");
+      })
+      .finally((all)=>{
+        console.log(all)
+      })
+    }
 
     //3.return statement
     return (
@@ -32,10 +78,10 @@ export default function Register() {
                       <div className="col-12 col-md-10">
                         <h1 className="font__family-montserrat font__weight-bold font__size-42 line__height-42 mt-0 mb-45">REGISTER</h1>
                         <form action="#" className="brk-form brk-form-strict maxw-570" data-brk-library="component__form">
-                          <input type="email" placeholder="Email Address" />
-                          <input type="password" placeholder="Password" />
+                          <input type="email" placeholder="Email Address" name="email" value={email} onChange={(e)=>{setEmail(e.target.value)}} required/>
+                          <input type="password" placeholder="Password" name="password" value={password} onChange={(e)=>{setPassword(e.target.value)}} required/>
                           <div className="mt-20 d-flex flex-wrap justify-content-between">
-                            <button className="btn-backgrounds btn-backgrounds btn-backgrounds_280 btn-backgrounds_white btn-backgrounds_left-icon font__family-montserrat font__weight-bold text-uppercase font__size-13 z-index-2 text-center letter-spacing-20 mt-10" data-brk-library="component__button">
+                            <button type="button" className="btn-backgrounds btn-backgrounds btn-backgrounds_280 btn-backgrounds_white btn-backgrounds_left-icon font__family-montserrat font__weight-bold text-uppercase font__size-13 z-index-2 text-center letter-spacing-20 mt-10" name="register" data-brk-library="component__button" onClick={ myFunc } value="Register" >
                               <span className="text">REGISTER</span>
                               <span className="before"><i className="far fa-hand-point-right" /></span>
                             </button>
