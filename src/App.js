@@ -1,5 +1,5 @@
 //import area
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
 import Error from './Pages/Error';
 import Home from './Pages/Home'
 import Login from './Pages/Login';

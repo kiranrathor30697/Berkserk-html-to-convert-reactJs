@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, NavLink } from 'react-router-dom'
 
 export default function Login() {
     //1.state/hook variable
@@ -15,13 +16,13 @@ export default function Login() {
                   <div className="brk-backgrounds brk-base-bg-gradient-15 brk-abs-overlay" data-brk-library="component__backgrounds_css,component__backgrounds_js,assets_particleground">
                     <div className="brk-backgrounds__canvas brk-particles-standart" />
                   </div>
-                  <a href="index.html" className="z-index-2 mb-60 pl-15 pr-15">
+                  <Link to="/" className="z-index-2 mb-60 pl-15 pr-15">
                     <img src="img/456x82_logo.png" alt="logo" className />
-                  </a>
-                  <a href="index.html" className="btn-backgrounds btn-backgrounds_transparent btn-backgrounds_left-icon font__family-montserrat font__weight-normal text-uppercase font__size-13 z-index-2 text-center" style={{paddingLeft: 85, paddingRight: 60}} data-brk-library="component__button">
+                  </Link>
+                  <NavLink to="/" className="btn-backgrounds btn-backgrounds_transparent btn-backgrounds_left-icon font__family-montserrat font__weight-normal text-uppercase font__size-13 z-index-2 text-center" style={{paddingLeft: 85, paddingRight: 60}} data-brk-library="component__button">
                     <span className="text">Back to the Homepage</span>
                     <span className="before"><i className="fas fa-arrow-left" /></span>
-                  </a>
+                  </NavLink>
                 </div>
               </div>
               <div className="col-12 col-lg-7">

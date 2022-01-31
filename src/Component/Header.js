@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
 export default function Header() {
         return <header className="brk-header d-lg-flex flex-column brk-header_style-1 brk-header_color-dark" style={{display: 'none'}} data-logo-src="img/logo-dark-2.png" data-bg-mobile="img/brk-bg-mobile-menu.jpg" data-sticky-hide={0} data-brk-library="component__header">
@@ -683,10 +684,10 @@ export default function Header() {
                                         <a href="login.html">Login/Register <i className="fas fa-angle-right" /></a>
                                         <ul className="brk-nav__sub-menu brk-nav-drop-down font__family-montserrat">
                                             <li className="dd-effect">
-                                            <a href="login.html">Login</a>
+                                            <NavLink to="/login">Login</NavLink>
                                             </li>
                                             <li className="dd-effect">
-                                            <a href="register.html">Register</a>
+                                            <Link to="/register">Register</Link>
                                             </li>
                                         </ul>
                                         </li>
