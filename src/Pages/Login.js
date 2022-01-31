@@ -37,11 +37,11 @@ export default function Login() {
         return response.json()
       })
       .then((response)=>{
-        console.log(response.status);
+        //console.log(response);
         /* if(response.status === 200){
           swal("Good job!", "Login Successfully!", "success");
         } */ 
-        //swal("Good job!", "Login Successfully!", "success");
+        swal("Good job!", "Login Successfully!", "success");
       })
     
       .catch((e)=>{
